@@ -1,7 +1,11 @@
-FROM node:10-alpine
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-RUN npm install
-COPY --chown=node:node . .
-EXPOSE 8082
-CMD [ "node", "app.js" ]
+FROM node:8.14.0-alpine
+
+WORKDIR /aizen
+
+COPY package.json .
+
+RUN yarn
+
+COPY . .
+
+CMD node app.js
