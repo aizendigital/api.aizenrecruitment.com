@@ -31,11 +31,6 @@ const multerConfig = {
 
 }
 
-router.use(express.static(__dirname + '/public'))
-router.get('/', function (req, res) {
-    res.sendfile('./public/index.html')
-})
-
 router.post('/submit', multer(multerConfig).single('inputFile'), async(req, res) => {
 console.log(req.body)
     const {error} = validate(req.body)
