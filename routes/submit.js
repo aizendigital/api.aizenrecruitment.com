@@ -50,15 +50,15 @@ console.log(req.body)
     var mailOptions = {
         from: config.mail.email_user,
         to: config.mail.email_to,
-        subject: ' new user data ;)',
-        html: `Hey there :) You are seeing a beautiful user data:<br> ${JSON.stringify(req.body)}`
+        subject: 'New CV recieved!',
+        html: `Dear Hazel, <br><br> ${req.body.name} applied through Aizen Recruitment website. <br><br> Contact: <br> ${req.body.name} <br> Phone: ${req.body.phone} <br> Email: ${req.body.email}`
       }
     }else{
         var mailOptions = {
             from: config.mail.email_user,
             to: config.mail.email_to,
-            subject: 'some new user cv ;)',
-            html: `Hey there :) You are seeing the CV of a beautiful user:<br> ${JSON.stringify(req.body)}`,
+            subject: 'New CV recieved!',
+            html: `Dear Hazel, <br><br> ${req.body.name} applied through Aizen Recruitment website. <br><br> Contact: <br> ${req.body.name} <br> Phone: ${req.body.phone} <br> Email: ${req.body.email} <br><br> You can find the CV attached.`,
             attachments: [{path: 'uploads/' + req.file.filename}]
           }
     }
