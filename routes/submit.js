@@ -46,21 +46,14 @@ console.log(req.body)
       mailData +=  key.toUpperCase() + ':' + req.body[key] + '<br/>';
     }
 
-    if(typeof req.file == 'undefined'){
     var mailOptions = {
-        from: config.mail.email_user,
-        to: config.mail.email_to,
-        subject: 'New CV recieved!',
-        html: `Dear Hazel,<br/>${req.body.name} applied through Aizen Recruitment website. <br/>Contact:<br/>${mailData}`,
-      }
-    } else{
-        var mailOptions = {
-            from: config.mail.email_user,
-            to: config.mail.email_to,
-            subject: 'New CV recieved!',
-            html: `Dear Hazel,<br/> ${req.body.name} applied through Aizen Recruitment website. <br/>Contact:<br/>${mailData}`,
-            attachments: [{path: 'uploads/' + req.file.filename}]
-          }
+      from: config.mail.email_user,
+      to: config.mail.email_to,
+      subject: 'New CV recieved!',
+      html: `Dear Hazel,<br/>${req.body.name} applied through Aizen Recruitment website. <br/>Contact:<br/>${mailData}`,
+    }
+    if(typeof req.file != 'undefined'){
+      mailOptions.attachments = [{path: 'uploads/' + req.file.filename}]
     }
 
       transporter.sendMail(mailOptions, function(error, info){
