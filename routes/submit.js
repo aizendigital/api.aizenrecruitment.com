@@ -41,19 +41,26 @@ console.log(req.body)
       }
     }
 
+    var mailData = '';
+    for (var key in req.body) {
+      mailData += '<br>' + key.toUpperCase() + ':' + req.body[key] + '<br>'
+    }
+
     if(typeof req.file == 'undefined'){
     var mailOptions = {
         from: config.mail.email_user,
         to: config.mail.email_to,
         subject: 'New CV recieved!',
-        html: `Dear Hazel, <br><br> ${req.body.name} applied through Aizen Recruitment website. <br><br> Contact: <br> ${req.body.name} <br> Phone: ${req.body.phone} <br> Email: ${req.body.email}`
+        html: `<br>Dear Hazel,<br> ${req.body.name} applied through Aizen Recruitment website. <br>
+          <br> Contact:${mailData}`,
       }
-    }else{
+    } else{
         var mailOptions = {
             from: config.mail.email_user,
             to: config.mail.email_to,
             subject: 'New CV recieved!',
-            html: `Dear Hazel, <br><br> ${req.body.name} applied through Aizen Recruitment website. <br><br> Contact: <br> ${req.body.name} <br> Phone: ${req.body.phone} <br> Email: ${req.body.email} <br><br> You can find the CV attached.`,
+            html: `<br>Dear Hazel,<br> ${req.body.name} applied through Aizen Recruitment website. <br>
+              <br> Contact:${mailData}`,
             attachments: [{path: 'uploads/' + req.file.filename}]
           }
     }
