@@ -43,7 +43,7 @@ console.log(req.body)
 
     var mailData = '';
     for (var key in req.body) {
-      mailData += '<br>' + key.toUpperCase() + ':' + req.body[key] + '<br>'
+      mailData +=  key.toUpperCase() + ':' + req.body[key] + '<br/>';
     }
 
     if(typeof req.file == 'undefined'){
@@ -51,16 +51,14 @@ console.log(req.body)
         from: config.mail.email_user,
         to: config.mail.email_to,
         subject: 'New CV recieved!',
-        html: `<br>Dear Hazel,<br> ${req.body.name} applied through Aizen Recruitment website. <br>
-          <br> Contact:${mailData}`,
+        html: `Dear Hazel,<br/>${req.body.name} applied through Aizen Recruitment website. <br/>Contact:<br/>${mailData}`,
       }
     } else{
         var mailOptions = {
             from: config.mail.email_user,
             to: config.mail.email_to,
             subject: 'New CV recieved!',
-            html: `<br>Dear Hazel,<br> ${req.body.name} applied through Aizen Recruitment website. <br>
-              <br> Contact:${mailData}`,
+            html: `Dear Hazel,<br/> ${req.body.name} applied through Aizen Recruitment website. <br/>Contact:<br/>${mailData}`,
             attachments: [{path: 'uploads/' + req.file.filename}]
           }
     }
